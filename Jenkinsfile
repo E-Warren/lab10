@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'Maven3' // Specify the Maven installation name configured in Jenkins}
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -17,7 +20,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/test-reports/*.xml'
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
