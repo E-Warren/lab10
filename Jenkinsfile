@@ -24,9 +24,14 @@ pipeline {
                 }
             }
         }
+        stage('Code Coverage') {
+            steps {
+                sh 'mvn -B jacoco:report'
+            }
+        }
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: 'target/*.jar,target/site/jacoco**', fingerprint: true
             }
         }
     }
